@@ -59,6 +59,8 @@ function PostCard({ post }) {
     setConfirmationDialogOpen(false);
   };
 
+  console.log(post);
+
   return (
     <Card>
       <CardHeader
@@ -97,7 +99,7 @@ function PostCard({ post }) {
               onClose={handleMenuClose}
             >
               <MenuItem onClick={handleEditPost}>
-                <PostEdit postId={post._id} />
+                <PostEdit postId={post._id} postContent={post.content} />
               </MenuItem>
               <MenuItem onClick={handleDeletePost}>Delete</MenuItem>
             </Menu>
