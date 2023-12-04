@@ -92,11 +92,13 @@ export default function PostEdit({ postId }) {
               //   fullWidth
               rows={4}
               sx={{
-                width: "100%",
                 "& fieldset": {
                   borderWidth: `1px !important`,
                   borderColor: alpha("#919EAB", 0.32),
                 },
+              }}
+              inputProps={{
+                style: { width: "600px" },
               }}
             ></FTextField>
 
