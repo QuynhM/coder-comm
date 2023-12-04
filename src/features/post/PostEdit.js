@@ -18,17 +18,12 @@ const yupSchema = Yup.object().shape({
   content: Yup.string().required("Content is required"),
 });
 
-const defaultValues = {
-  content: "",
-  image: null,
-};
-
-export default function PostEdit({ postId }) {
+export default function PostEdit({ postId, postContent }) {
   const { isLoading } = useSelector((state) => state.post);
 
   const methods = useForm({
     resolver: yupResolver(yupSchema),
-    defaultValues,
+    defaultValues: { content: postContent, image: null },
   });
   const {
     handleSubmit,
@@ -69,6 +64,8 @@ export default function PostEdit({ postId }) {
     );
   };
 
+  console.log(postContent);
+
   return (
     <React.Fragment>
       <Typography onClick={handleClickOpen}>Edit</Typography>
@@ -79,8 +76,6 @@ export default function PostEdit({ postId }) {
         aria-describedby="alert-dialog-description"
         sx={{ maxWidth: "50vw", margin: "auto" }}
       >
-        {/* <Paper sx={{ maxWidth: "50vw", margin: "auto" }}> */}
-        {/* Set maxWidth on Paper */}
         <DialogTitle id="alert-dialog-title">{"Edit Post"}</DialogTitle>
         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
           <DialogContent>
@@ -100,19 +95,16 @@ export default function PostEdit({ postId }) {
               inputProps={{
                 style: { width: "600px" },
               }}
-            ></FTextField>
-
+              // defaultValue={postContent}
+            />
             <FUploadImage
               name="image"
               accept="image/*"
               maxSize={3145728}
               onDrop={handleDrop}
             />
-            {/* </Stack> */}
-            {/* </Card> */}
           </DialogContent>
           <DialogActions>
-            {/* <Button onClick={handleClose}>Disagree</Button> */}
             <Box
               sx={{
                 display: "flex",
